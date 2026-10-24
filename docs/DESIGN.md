@@ -11,3 +11,5 @@ Browser-local library and JSON patch export/import; 64 kit/pattern slots per ban
 Four voice colors: cyan #31d7cb, gold #e4cb73, coral #ee8c9e, violet #a59af4. Original imagegen banner, left title space, minimal psychedelic organic contour energy. Native vector dice icons, with tooltips and accessible labels. Preserve all unrelated voices and sound/pattern data when randomizing a single voice.
 
 Validation: Node behavior tests before DSP/model implementation, real browser AudioWorklet audio output and controls, state persistence, responsive views, no console errors, then actual deployed HTTPS Pages asset and audio checks. No custom-domain changes or installation of unrelated services.
+
+Step editing remains on existing controls: click a step, turn a knob to save its lock; right-click the knob to clear only that lock. Click the voice trigger/name to edit base values across the sequence while preserving other step locks. No added lock lane or sliders. The banner provides a direct macOS Apple silicon AU/VST3 binary download hosted in GitHub Releases; native source remains local.

@@ -4,3 +4,5 @@
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}.dice:hover svg{transform:none}}
 
 #exitLockButton{min-height:24px;font-size:8px;padding:0 9px;margin-left:auto;color:var(--cyan)}.section-label #exitLockButton:not([hidden])+span{display:none}
+
+.banner{height:210px}.plugin-download{display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;margin-top:15px;padding:12px 19px;min-width:236px;min-height:55px;border:1px solid var(--cyan);border-radius:6px;background:var(--cyan);color:#071b1a;font-size:13px;font-weight:700;letter-spacing:.04em;text-decoration:none;box-shadow:0 4px 22px #31d7cb14}.plugin-download span{font-size:9px;font-weight:400;color:#173d39;letter-spacing:.02em}.plugin-download:hover{background:#6de8df;color:#071b1a;border-color:#6de8df}.voice-identity{cursor:pointer}.voice-identity:focus-visible{outline:1px solid var(--cyan);outline-offset:4px}@media(max-width:760px){.banner{height:238px;padding-bottom:50px}.banner nav{top:192px}.plugin-download{margin-top:12px;min-width:226px;font-size:12px}.plugin-download span{font-size:9px}}
