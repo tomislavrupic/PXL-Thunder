@@ -1,5 +1,5 @@
-import {Engine} from './engine.mjs?v=20261025-2';
-import {createState,normalizeState,applyKit,applyPattern,clamp,stepIndex,GLOBAL_DEFAULTS} from '../model.mjs?v=20261025-2';
+import {Engine} from './engine.mjs?v=20261025-3';
+import {createState,normalizeState,applyKit,applyPattern,clamp,stepIndex,GLOBAL_DEFAULTS} from '../model.mjs?v=20261025-3';
 const DIV=[8,4,2,4/3,1],MUL=[1,2,1.5,4];
 export function nearestStep(beat,track){const duration=.25*DIV[track.division]/MUL[track.multiply];let tick=Math.floor(beat/duration),position=beat/duration,start=tick+(tick%2?track.shuffle*.5:0);if(position<start){tick--;start=tick+(tick%2?track.shuffle*.5:0);}const next=tick+1+((tick+1)%2?track.shuffle*.5:0);return stepIndex(position-start<next-position?tick:tick+1,track.length,track.direction);}
 export class Runtime{

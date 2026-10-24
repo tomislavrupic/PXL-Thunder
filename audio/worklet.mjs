@@ -1,4 +1,4 @@
-import {Runtime} from './runtime.mjs?v=20261025-2';
+import {Runtime} from './runtime.mjs?v=20261025-3';
 class ThunderWorklet extends AudioWorkletProcessor{
  constructor(){super();this.runtime=new Runtime(sampleRate);this.peaks=new Float32Array(4);this.frames=0;this.port.onmessage=event=>this.runtime.message(event.data);}
  process(inputs,outputs){const channels=outputs[0];if(!channels?.length)return true;const n=channels[0].length,r=this.runtime;

@@ -1,4 +1,4 @@
-import {normalizeState,demoState,createState,captureKit,capturePattern,applyKit,applyPattern,clamp}from'./model.mjs?v=20261025-2';
+import {normalizeState,demoState,createState,captureKit,capturePattern,applyKit,applyPattern,clamp}from'./model.mjs?v=20261025-3';
 export function createLibrary(state=demoState()){return {banks:{0:{kits:{0:captureKit(state)},patterns:{0:{...capturePattern(state),kitIndex:0}},lastKit:0,lastPattern:0}},bank:0,kit:0,pattern:0,kitLink:true,chain:[]};}
 export function bankOf(library,index=library.bank){const key=String(clamp(Math.floor(index),0,63));return library.banks[key]??(library.banks[key]={kits:{},patterns:{},lastKit:0,lastPattern:0});}
 const slotIndex=value=>clamp(Number.isFinite(value)?Math.round(value):0,0,63);

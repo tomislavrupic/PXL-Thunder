@@ -6,9 +6,9 @@ Four independent 16-step tracks, 36 synthesis variants, voice filters and drive,
 
 - Press **PLAY**, tap **1–4**, or click the living field. Drag a creature to move P1/P2.
 - Each voice's dice generates only that voice's rhythm. **Shift-click** undoes the rhythm; sounds, locks, and track timing stay intact.
-- **STEP LOCKS**: choose a voice and parameter, then drag the sixteen bars. Repeat for other parameters: all eleven voice controls can be locked simultaneously on a step, including algorithm, mode, and filter type. A lock count shows combined locks. Right-click a bar or press Delete while focused to remove it.
-- **Alt-click a sequencer step** to select it and turn multiple knobs into locks. **EXIT LOCK** returns knobs to their base sound. Right-click a step for velocity, ratchets, probability, odds, copy/paste, and locks.
-- The **FX** lock lane provides per-step delay, compressor, output, LFO and sample-mode locks. It follows the shared sixteen-step clock. Unlocked steps restore the base values. Voice lanes follow their own track timing.
+- **Pick a step, turn an existing knob.** Its value is saved for that step. Keep turning other controls to add more locks, including algorithm, mode and filter type. Picking an active step keeps its hit on; click the selected step again to toggle its hit. A small dot marks steps with locks.
+- Click the selected-step label **×** or press Escape to return to the base sound. Right-click a step for velocity, ratchets, probability, odds, copy/paste, and clearing locks.
+- Existing FX controls also save shared per-step delay, compressor, output and LFO locks. These use the shared sixteen-step clock. Unlocked steps restore base values.
 - **REC** captures taps and knob movements during playback. **SHIFT**, **SHUFFLE**, **LAST** and **MOD** expose track performance modes.
 - Pattern and kit banks are separate. Alt-click saved patterns to form a chain; Shift-click recalls immediately.
 - Changes save in this browser. Use **FILE → EXPORT** for a portable `.pxlthunder.json` patch containing the bank library, locks and imported samples.

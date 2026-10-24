@@ -1,5 +1,5 @@
 // Independent PXL Thunder synthesis port. No sample-by-sample object allocation.
-import {clamp,randomAt,stepIndex,GLOBAL_DEFAULTS,FX_LOCK_KEYS} from '../model.mjs?v=20261025-2';
+import {clamp,randomAt,stepIndex,GLOBAL_DEFAULTS,FX_LOCK_KEYS} from '../model.mjs?v=20261025-3';
 const TAU=Math.PI*2,BASE=[24,40,55,160],DIVISIONS=[8,4,2,4/3,1],MULTIPLIERS=[1,2,1.5,4],METAL=[1,1.342,1.791,2.129,2.731,3.571],DELAY_RATIOS=[.125,.25,.5,1,1.5,2,3,4],GLOBAL_KEYS=Object.keys(GLOBAL_DEFAULTS);
 export function factorySample(mode){const size=[9000,30000,48000][mode],sample=new Float32Array(size);let rng=917+mode,lp=0;for(let i=0;i<size;i++){rng=(Math.imul(1664525,rng)+1013904223)|0;const noise=rng/2147483648;lp+=.07*(noise-lp);const t=i/48000,metal=Math.sin(TAU*6073*t)*Math.sin(TAU*8391*t);sample[i]=((noise-lp)*.65+metal*.2)*Math.exp(-t*[40,10,5][mode])*clamp(i/40);}return sample;}
 class Voice{
