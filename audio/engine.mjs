@@ -6,7 +6,7 @@ class Voice{
  constructor(rate,seed){this.rate=rate;this.seed=seed;this.string=new Float64Array(8192);this.smooth=new Float64Array(11);this.reset();}
  reset(){this.phase=this.modPhase=this.samplePos=0;this.age=100;this.velocity=1;this.pitchOffset=0;this.noiseLP=this.reverb=this.dcX=this.dcY=this.s1=this.s2=0;this.rng=this.seed;this.stringPos=0;this.stringLength=200;this.string.fill(0);this.smooth.set([.35,.35,.3,.25,.85,.1,.08,.7,0,0,2]);}
  noise(){this.rng=(Math.imul(1664525,this.rng)+1013904223)|0;return this.rng/2147483648;}
- trigger(velocity,p,voice,offset=0){this.age=0;this.phase=this.modPhase=this.samplePos=0;this.velocity=clamp(velocity);this.pitchOffset=offset;this.smooth.set(p);const frequency=BASE[voice]*2**(clamp(p[0]+offset)*7);this.stringLength=clamp(Math.floor(this.rate*2/frequency),4,8190);this.stringPos=0;if(voice===2&&p[8]===2)for(let i=0;i<this.stringLength;i++)this.string[i]=this.noise();}
+ trigger(velocity,p,voice,offset=0){this.age=0;this.phase=this.modPhase=this.samplePos=0;this.velocity=clamp(velocity);this.pitchOffset=offset;this.smooth.set(p);const frequency=BASE[voice]*2**(clamp(p[0]+offset)*7);this.stringLength=clamp(Math.floor(this.rate*2/frequency),4,8190);this.stringPos=0;if(voice===2&&Math.round(p[8])===2)for(let i=0;i<this.stringLength;i++)this.string[i]=this.noise();}
  run(target,voice,samples,sampleStart){
   const p=this.smooth;for(let j=0;j<8;j++)p[j]+=.015*(target[j]-p[j]);for(let j=8;j<11;j++)p[j]=target[j];
   const algorithm=clamp(Math.round(p[8]),0,2),mode=clamp(Math.round(p[9]),0,2),filter=clamp(Math.round(p[10]),0,2),drone=target[1]>=.9995;

@@ -9,7 +9,7 @@ export class Runtime{
  message(m){
   if(!m||typeof m.type!=='string')return;
   if(Number.isInteger(m.revision))this.revision=m.revision;if(Number.isInteger(m.generation))this.generation=m.generation;
-  if(m.type==='state'){this.state=normalizeState(m.state);this.pending=null;this.chain=[];this.chainPosition=-1;this.restart=true;this.engine.resetClock();this.engine.suppressed.fill(false);return;}
+  if(m.type==='state'){this.state=normalizeState(m.state);this.pending=null;this.chain=[];this.chainPosition=-1;this.selected=null;this.changed=false;this.recorded=[];this.restart=true;this.engine.resetClock();this.engine.suppressed.fill(false);return;}
   if(m.type==='play'){if(!!m.value&&!this.playing){this.restart=true;if(this.chain.length)this.chainPosition=-1;}this.playing=!!m.value;return;}
   if(m.type==='record'){this.record=!!m.value;return;}
   if(m.type==='reset'){this.beat=0;this.restart=true;this.chainPosition=-1;this.engine.resetClock();return;}
@@ -50,6 +50,6 @@ export function applyMutation(state,m){
   if(m.kind==='mod'&&k>=0&&k<8){t.mod[k]=clamp(m.value,0,.8);return;}
   if(m.kind==='track'){const ranges={length:[1,16],division:[0,4],multiply:[0,3],direction:[0,3],groove:[-1,3],fillRate:[0,7],shuffle:[0,1]};if(ranges[m.key])t[m.key]=clamp(m.value,...ranges[m.key]);return;}
   if(s<0||s>15)return;const step=t.steps[s];
-  if(m.kind==='lock'&&k>=0&&k<11){step.locks[k]=clamp(m.value,-1,k<8?1:2);return;}
+  if(m.kind==='lock'&&k>=0&&k<11){step.locks[k]=m.value<0?-1:k<8?clamp(m.value,0,1):clamp(Math.round(m.value),0,2);return;}
   if(m.kind==='step'){if(m.key==='on')step.on=!!m.value;else{const ranges={velocity:[0,1],probability:[0,1],ratchet:[1,5],oddsN:[1,7],oddsD:[1,8]};if(ranges[m.key])step[m.key]=clamp(m.value,...ranges[m.key]);}}
 }

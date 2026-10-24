@@ -20,7 +20,7 @@ export function normalizeState(input={}){
   const t=out.tracks[v],src=input.tracks?.[v]??{};
   for(const [key,lo,hi]of [['length',1,16],['division',0,4],['multiply',0,3],['direction',0,3],['groove',-1,3],['fillRate',0,7]])t[key]=number(src[key],t[key],lo,hi,true);
   t.shuffle=number(src.shuffle,0);for(let k=0;k<8;k++)t.mod[k]=number(src.mod?.[k],0,0,.8);
-  for(let i=0;i<16;i++){const s=t.steps[i],a=src.steps?.[i]??{};s.on=a.on===true;s.velocity=number(a.velocity,.85);s.probability=number(a.probability,1);s.ratchet=number(a.ratchet,1,1,5,true);s.oddsN=number(a.oddsN,1,1,7,true);s.oddsD=number(a.oddsD,1,1,8,true);for(let k=0;k<11;k++)s.locks[k]=number(a.locks?.[k],-1,-1,k<8?1:2);}
+  for(let i=0;i<16;i++){const s=t.steps[i],a=src.steps?.[i]??{};s.on=a.on===true;s.velocity=number(a.velocity,.85);s.probability=number(a.probability,1);s.ratchet=number(a.ratchet,1,1,5,true);s.oddsN=number(a.oddsN,1,1,7,true);s.oddsD=number(a.oddsD,1,1,8,true);for(let k=0;k<11;k++)s.locks[k]=k>=8?(Number.isFinite(a.locks?.[k])&&a.locks[k]>=0?number(a.locks[k],0,0,2,true):-1):number(a.locks?.[k],-1,-1,1);}
  }
  for(const [key,initial]of Object.entries(GLOBAL_DEFAULTS))out.globals[key]=typeof initial==='boolean'?(typeof input.globals?.[key]==='boolean'?input.globals[key]:initial):number(input.globals?.[key],initial,key==='bpm'?20:0,key==='bpm'?420:key==='lfoWave'?6:1,key==='lfoWave');
  for(let i=0;i<16;i++)for(const key of FX_LOCK_KEYS){const value=input.fxSteps?.[i]?.locks?.[key];if(Number.isFinite(value)&&value>=0)out.fxSteps[i].locks[key]=number(value,0,0,key==='lfoWave'?6:1,key==='lfoWave'||typeof GLOBAL_DEFAULTS[key]==='boolean');}
