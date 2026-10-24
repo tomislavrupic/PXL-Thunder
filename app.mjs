@@ -1,7 +1,7 @@
-import {applyMutation}from'./audio/runtime.mjs';
-import {ALGORITHMS,PARAM_NAMES,VOICE_KEYS,VOICE_LABELS,COLOURS,GLOBAL_DEFAULTS,FX_LOCK_KEYS,createState,demoState,normalizeState,createStep,clamp,randomizePattern,captureKit,capturePattern,applyKit,applyPattern}from'./model.mjs';
-import {createLibrary,bankOf,exportSession,importSession,parseWav,encodeSample,decodeSample}from'./session.mjs';
-import {factorySample}from'./audio/engine.mjs';
+import {applyMutation}from'./audio/runtime.mjs?v=20261025-2';
+import {ALGORITHMS,PARAM_NAMES,VOICE_KEYS,VOICE_LABELS,COLOURS,GLOBAL_DEFAULTS,FX_LOCK_KEYS,createState,demoState,normalizeState,createStep,clamp,randomizePattern,captureKit,capturePattern,applyKit,applyPattern}from'./model.mjs?v=20261025-2';
+import {createLibrary,bankOf,exportSession,importSession,parseWav,encodeSample,decodeSample}from'./session.mjs?v=20261025-2';
+import {factorySample}from'./audio/engine.mjs?v=20261025-2';
 const $=id=>document.getElementById(id),STORAGE='pxl-thunder-web-v1';
 const FX_LABELS={time:'Delay time',feedback:'Feedback',delayRate:'Delay LFO rate',delayDepth:'Delay modulation',master:'Output',masterSend:'FX return',threshold:'Comp threshold',compression:'Compression',lfoRate:'LFO rate',lfoWave:'LFO shape',lfoLevel:'LFO amount',lfoSync:'LFO sync',delayLong:'Long delay',delayColour:'Delay colour',delaySync:'Delay sync',sampleStart:'Sample start'};
 const DICE='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8" cy="8" r=".8"/><circle cx="16" cy="8" r=".8"/><circle cx="12" cy="12" r=".8"/><circle cx="8" cy="16" r=".8"/><circle cx="16" cy="16" r=".8"/></svg>';
@@ -9,7 +9,7 @@ class AudioGraph{
  constructor(onMessage,onError){this.context=null;this.node=null;this.analyser=null;this.ready=null;this.onMessage=onMessage;this.onError=onError;}
  async enable(state,samples){if(this.node){await this.context.resume();return;}if(this.ready)return this.ready;
   const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw new Error('Web Audio is unavailable in this browser.');this.context=new Audio({latencyHint:'interactive'});const resumed=this.context.resume();
-  this.ready=(async()=>{if(!this.context.audioWorklet)throw new Error('Use a browser with AudioWorklet support.');await this.context.audioWorklet.addModule(new URL('./audio/worklet.mjs',import.meta.url));this.node=new AudioWorkletNode(this.context,'pxl-thunder',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]});this.analyser=this.context.createAnalyser();this.analyser.fftSize=256;this.node.connect(this.analyser);this.analyser.connect(this.context.destination);this.node.port.onmessage=e=>this.onMessage(e.data);this.node.onprocessorerror=()=>this.onError('Audio engine stopped. Reload to restart it.');this.send({type:'state',state});samples.forEach((sample,slot)=>{if(sample)this.send({type:'samples',slot,data:decodeSample(sample.data)});});await resumed;})();
+  this.ready=(async()=>{if(!this.context.audioWorklet)throw new Error('Use a browser with AudioWorklet support.');await this.context.audioWorklet.addModule(new URL('./audio/worklet.mjs?v=20261025-2',import.meta.url));this.node=new AudioWorkletNode(this.context,'pxl-thunder',{numberOfInputs:0,numberOfOutputs:1,outputChannelCount:[2]});this.analyser=this.context.createAnalyser();this.analyser.fftSize=256;this.node.connect(this.analyser);this.analyser.connect(this.context.destination);this.node.port.onmessage=e=>this.onMessage(e.data);this.node.onprocessorerror=()=>this.onError('Audio engine stopped. Reload to restart it.');this.send({type:'state',state});samples.forEach((sample,slot)=>{if(sample)this.send({type:'samples',slot,data:decodeSample(sample.data)});});await resumed;})();
   try{await this.ready;}catch(error){await this.context.close();this.ready=null;this.node=null;throw error;}
  }
  send(message){this.node?.port.postMessage(message);}
