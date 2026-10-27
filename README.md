@@ -24,3 +24,9 @@ No dependencies or build step. `npm test` runs DSP, sequencing and session tests
 Original banner and generation provenance: [assets/BANNER-PROMPT.md](assets/BANNER-PROMPT.md).
 
 Download the macOS Apple silicon AU/VST3 developer build from the banner or [GitHub Releases](https://github.com/tomislavrupic/PXL-Thunder/releases/tag/v0.1.0).
+
+## Notarized Mac plugin release — 27 October 2026
+
+AU/VST3 download: https://github.com/tomislavrupic/PXL-Thunder/releases/download/notarized-2026-10-27/PXL-Thunder-0.1.0-macOS-arm64-Notarized-2026-10-27.zip
+
+This release contains the signed, Apple-notarized plugin bundles with stapled tickets. Standalone apps are not part of this Mac plugin ZIP. Save your session, back up previous copies, install whole bundles and restart/rescan your DAW. Existing Windows downloads and artwork remain available.
